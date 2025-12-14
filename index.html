@@ -1,307 +1,897 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Clarity Protocol | For The Invisible Builder</title>
+
+    <title>The Voice-First Framework | Workbook</title>
+
     <style>
+
         /* --- RESET & VARIABLES --- */
+
         :root {
+
             --primary: #FE4B00;    /* Signal Orange */
+
             --bg: #161616;         /* Deep Void */
+
             --surface: #1e1e1e;    /* Card Surface */
+
             --text-main: #E5E3D2;  /* Bone White */
+
             --text-muted: #888888;
+
             --accent: #A8CACD;     /* Muted Teal */
+
             --font-display: 'Playfair Display', serif;
+
             --font-body: 'Inter', system-ui, sans-serif;
+
         }
+
+
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+
+
         body {
+
             background-color: var(--bg);
+
             color: var(--text-main);
+
             font-family: var(--font-body);
+
             overflow-x: hidden;
+
             line-height: 1.6;
+
         }
+
+
 
         /* --- TYPOGRAPHY --- */
+
         h1, h2, h3, h4 {
+
             font-family: var(--font-display);
+
             font-weight: 400;
+
             line-height: 1.2;
+
             margin-bottom: 1rem;
+
         }
+
+
 
         h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+
         h2 { font-size: 2rem; color: var(--text-main); margin-top: 3rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+
         h3 { font-size: 1.5rem; color: var(--accent); margin-top: 2rem; }
+
         h4 { font-size: 1.1rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-top: 1.5rem; }
 
+
+
         p { margin-bottom: 1.5rem; color: #ccc; }
-        li { margin-bottom: 0.8rem; margin-left: 20px; color: #ccc; }
-        
+
+        li { margin-bottom: 0.5rem; margin-left: 20px; color: #ccc; }
+
+
+
         strong { color: white; font-weight: 600; }
-        em { color: var(--primary); font-style: normal; }
+
+
 
         /* --- UTILITIES --- */
+
         .container {
+
             max-width: 900px;
+
             margin: 0 auto;
+
             padding: 0 20px;
+
         }
+
+
 
         /* --- ANIMATIONS --- */
+
         .reveal {
+
             opacity: 0;
+
             transform: translateY(30px);
+
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
         }
+
         .reveal.active {
+
             opacity: 1;
+
             transform: translateY(0);
+
         }
+
+
 
         /* --- HERO --- */
+
         .header {
-            min-height: 90vh;
+
+            min-height: 80vh;
+
             display: flex;
+
             flex-direction: column;
+
             justify-content: center;
+
             text-align: center;
+
             position: relative;
-        }
-        
-        .glow-orb {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(254,75,0,0.1) 0%, rgba(22,22,22,0) 70%);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
+
         }
 
-        /* --- CONTENT BOXES (Reused Workbook Styling) --- */
-        .content-box {
-            background: rgba(255,255,255,0.02);
-            border-left: 1px solid var(--primary);
-            padding: 30px;
-            margin: 30px 0;
+        
+
+        .glow-orb {
+
+            position: absolute;
+
+            width: 600px;
+
+            height: 600px;
+
+            background: radial-gradient(circle, rgba(254,75,0,0.1) 0%, rgba(22,22,22,0) 70%);
+
+            top: 50%; left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            z-index: -1;
+
         }
+
+
 
         /* --- THE FORMULA VISUAL --- */
+
         .formula-box {
+
             background: var(--surface);
+
             border: 1px solid #333;
+
             padding: 40px;
+
             border-radius: 12px;
+
             text-align: center;
+
             margin: 40px 0;
+
         }
+
+
 
         .formula-step {
+
             font-family: var(--font-display);
+
             font-size: 1.5rem;
+
             color: white;
+
         }
+
         .formula-sub { font-size: 0.9rem; color: var(--accent); display: block; margin-top: 5px; font-family: var(--font-body); }
+
         .arrow { color: var(--primary); font-size: 2rem; margin: 10px 0; }
 
-        /* --- COMPARISON GRID --- */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+
+
+        /* --- WORKBOOK INPUTS --- */
+
+        .workbook-section {
+
+            background: rgba(255,255,255,0.02);
+
+            border-left: 1px solid var(--primary);
+
+            padding: 30px;
+
             margin: 30px 0;
-        }
-        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
 
-        .compare-col {
-            background: #1a1a1a;
-            padding: 25px;
-            border: 1px solid #333;
-        }
-        .compare-col.pain { border-top: 3px solid #444; }
-        .compare-col.desire { border-top: 3px solid var(--primary); }
-
-        .compare-title { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 15px; color: white; }
-
-        /* --- CTA BUTTONS --- */
-        .cta-container {
-            text-align: center;
-            margin: 50px 0;
         }
 
-        .btn-primary {
-            background: var(--text-main);
-            color: var(--bg);
-            border: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: all 0.3s;
-            display: inline-block;
-            text-decoration: none;
-        }
 
-        .btn-primary:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(254,75,0,0.2);
-        }
 
-        .floating-cta {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-        }
+        .input-group { margin-bottom: 25px; }
+
         
-        .btn-small {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
+
+        label {
+
+            display: block;
+
+            color: var(--accent);
+
+            font-size: 0.9rem;
+
+            margin-bottom: 10px;
+
             font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            transition: all 0.3s;
+
         }
-        .btn-small:hover { transform: translateY(-2px); }
+
+
+
+        input[type="text"], textarea {
+
+            width: 100%;
+
+            background: transparent;
+
+            border: none;
+
+            border-bottom: 1px solid #444;
+
+            color: white;
+
+            font-family: var(--font-body);
+
+            font-size: 1.1rem;
+
+            padding: 10px 0;
+
+            outline: none;
+
+            transition: border-color 0.3s;
+
+        }
+
+
+
+        textarea { height: 100px; resize: vertical; }
+
+
+
+        input[type="text"]:focus, textarea:focus {
+
+            border-bottom-color: var(--primary);
+
+        }
+
+
+
+        /* --- EXAMPLES BOX --- */
+
+        .example-box {
+
+            background: #1a1a1a;
+
+            border: 1px dashed #444;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            font-size: 0.9rem;
+
+            color: #888;
+
+        }
+
+        .example-box strong { color: var(--accent); }
+
+
+
+        /* --- ACTION BUTTONS --- */
+
+        .floating-actions {
+
+            position: fixed;
+
+            bottom: 30px;
+
+            right: 30px;
+
+            z-index: 100;
+
+        }
+
+
+
+        .btn-download {
+
+            background: var(--text-main);
+
+            color: var(--bg);
+
+            border: none;
+
+            padding: 15px 30px;
+
+            border-radius: 50px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+            transition: all 0.3s;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+
+        .btn-download:hover {
+
+            background: var(--primary);
+
+            color: white;
+
+            transform: translateY(-5px);
+
+        }
+
+
+
+        /* --- PRINT STYLES (For PDF Download) --- */
+
+        @media print {
+
+            body { background-color: white; color: black; }
+
+            .glow-orb, .btn-download, .floating-actions { display: none; }
+
+            .container { max-width: 100%; padding: 0 40px; }
+
+            h1, h2, h3, strong { color: black; }
+
+            h4 { color: #FE4B00; }
+
+            p, li { color: #444; }
+
+            .workbook-section { border: 1px solid #ccc; border-left: 4px solid #FE4B00; page-break-inside: avoid; }
+
+            .example-box { border: 1px dashed #ccc; color: #555; }
+
+            input[type="text"], textarea { border-bottom: 1px solid black; color: black; }
+
+            h2 { border-bottom: 2px solid black; }
+
+            
+
+            /* Hide the dark mode background styles */
+
+            .formula-box { background: white; border: 1px solid black; color: black; }
+
+            .formula-step { color: black; }
+
+            .formula-sub { color: #555; }
+
+        }
 
     </style>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
 
-    <div class="floating-cta reveal">
-        <button class="btn-small">Get The Protocol</button>
+
+
+    <div class="floating-actions reveal">
+
+        <button class="btn-download" onclick="window.print()">
+
+            <span>⬇ Save as PDF</span>
+
+        </button>
+
     </div>
+
+
 
     <div class="header">
+
         <div class="glow-orb"></div>
+
         <div class="container reveal">
-            <h4 style="margin-bottom: 20px;">The Clarity Protocol</h4>
-            <h1>You’ve Been Building for 2 Years.<br>Why Are You Still Invisible?</h1>
-            <p style="font-size: 1.2rem; color: var(--accent); max-width: 650px; margin: 30px auto;">
-                You watch people with less experience get the clients, the speaking gigs, and the opportunities. 
-                Meanwhile, you’re stuck posting into the void.
+
+            <h4 style="margin-bottom: 20px;">The Methodology</h4>
+
+            <h1>The Voice-First Framework</h1>
+
+            <p style="font-size: 1.2rem; color: var(--accent); max-width: 600px; margin: 20px auto;">
+
+                Your Complete Guide to Building a Category-of-One Brand
+
             </p>
-            <div class="cta-container">
-                <a href="#" class="btn-primary">End The Cycle of Invisibility</a>
-                <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">Read the manifesto below ↓</p>
-            </div>
+
         </div>
+
     </div>
+
+
 
     <div class="container">
+
         
+
         <section class="reveal">
-            <h2>The 3am Spiral</h2>
-            <div class="content-box">
-                <p>It’s 3am. You just scrolled LinkedIn and saw someone in your industry go viral. Again.</p>
-                <p>They posted something you could’ve written. But they got 10K likes. You got 15.</p>
-                <p>You’ve tried everything:</p>
+
+            <h2>Before You Start</h2>
+
+            <div class="workbook-section">
+
+                <p>This framework takes 90 minutes to 3 hours to complete.</p>
+
                 <ul>
-                    <li>Studying successful people (it just made you feel generic)</li>
-                    <li>"Finding your niche" (it felt like putting yourself in a box)</li>
-                    <li>Posting consistently (exhausting, didn't help)</li>
+
+                    <li><strong>You'll need:</strong> A quiet space, honesty, and time.</li>
+
+                    <li><strong>Three rules:</strong> Don't rush. Don't skip sections. Don't perform.</li>
+
                 </ul>
-                <p style="margin-top: 20px;">
-                    And now you’re stuck in the loop: <strong>Post → Compare → Feel invisible → Copy someone else → Repeat.</strong>
-                </p>
-                <p style="color: var(--primary); font-weight: 600;">
-                    The real nightmare? You're starting to wonder: "What if I give this 2 more years and I'm in the exact same place?"
-                </p>
+
+                <p style="margin-top: 20px; font-style: italic;">The goal is TRUTH, not performance.</p>
+
             </div>
+
         </section>
 
-        <section class="reveal">
-            <h2>The Diagnosis</h2>
-            <p>You don't have a content problem. You don't have a "follower" problem.</p>
-            <h3 style="color: white; border: none; margin-top: 0;">You have a <em>Clarity</em> problem.</h3>
-            
-            <div class="comparison-grid">
-                <div class="compare-col pain">
-                    <div class="compare-title">The Trap</div>
-                    <p>You can't articulate what makes you uniquely valuable.</p>
-                    <p>So you default to <strong>copying what works for others.</strong></p>
-                    <p>This keeps you trapped in the middle—too similar to stand out, too generic to charge premium.</p>
-                </div>
-                <div class="compare-col desire">
-                    <div class="compare-title">The Truth</div>
-                    <p>Your unique value isn't in WHAT you do. Everyone does similar things.</p>
-                    <p>Your unique value is in <strong>WHO YOU ARE.</strong></p>
-                    <p>It's your beliefs, your vision, and your obsession. That is your Voice.</p>
-                </div>
-            </div>
-        </section>
+
 
         <section class="reveal">
-            <h2>The Solution: Voice-First Branding</h2>
-            <p>The Clarity Protocol reverses the standard advice. We don't start with "market research." We start with <strong>You</strong>.</p>
+
+            <h2>The Formula</h2>
+
+            <p>The Voice-First Framework is a systematic process for discovering what makes you uniquely valuable.</p>
+
             
+
             <div class="formula-box">
-                <div class="formula-step">1. SELF-DISCOVERY <span class="formula-sub">Excavate Your Beliefs + Vision + Story</span></div>
+
+                <div class="formula-step">VOICE <span class="formula-sub">Who You Are (Belief + Process + Experience)</span></div>
+
                 <div class="arrow">↓</div>
-                <div class="formula-step">2. SELF-EXPRESSION <span class="formula-sub">Build Messaging & Offers from your Voice</span></div>
+
+                <div class="formula-step">EXPRESSION <span class="formula-sub">How You Show It (Stories + Expertise + Vision)</span></div>
+
                 <div class="arrow">↓</div>
-                <div class="formula-step" style="color: var(--primary);">3. SELF-POSITIONING <span class="formula-sub">Own Your Category of One</span></div>
+
+                <div class="formula-step" style="color: var(--primary);">CATEGORY OF ONE <span class="formula-sub">The Result</span></div>
+
             </div>
+
         </section>
+
+
 
         <section class="reveal">
-            <h2>The Outcome</h2>
-            <div class="content-box">
-                <p>Imagine waking up to 3 DMs from ideal clients who found your content and said, <em>"This is exactly what I needed."</em></p>
-                <ul>
-                    <li><strong>No more imposter syndrome:</strong> Because you aren't performing. You're just being.</li>
-                    <li><strong>No more price objections:</strong> Because you are the only option, not just the "cheapest" option.</li>
-                    <li><strong>No more 3am spirals:</strong> You know exactly what you are building and why.</li>
-                </ul>
+
+            <h2>Phase 1: Voice (The Excavation)</h2>
+
+            <p>Discover your unique intersection before you build.</p>
+
+
+
+            <h3>Step 1: Discover Your Core Belief</h3>
+
+            <p>Your Core Belief is the ONE contrarian truth you hold about your field that most people get wrong. It is your philosophical differentiator.</p>
+
+            
+
+            <div class="workbook-section">
+
+                <h4>Excavation Questions</h4>
+
+                
+
+                <div class="input-group">
+
+                    <label>1. What advice in your industry makes you angry? Why?</label>
+
+                    <textarea placeholder='"Post 3x a day" makes me angry because...'></textarea>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>2. What do you see people doing that doesn't work?</label>
+
+                    <textarea placeholder='I see people...'></textarea>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>3. If you could change ONE thing about how your topic is taught, what would it be?</label>
+
+                    <textarea placeholder="I'd make people..."></textarea>
+
+                </div>
+
+
+
+                <div class="input-group" style="margin-top: 40px;">
+
+                    <label style="color: var(--primary); font-size: 1.1rem;">YOUR CORE BELIEF STATEMENT</label>
+
+                    <p style="font-size: 0.8rem; margin-bottom: 5px;">Format: "I believe [YOUR BELIEF], not [COMMON BELIEF]."</p>
+
+                    <input type="text" placeholder="I believe..., not...">
+
+                </div>
+
             </div>
+
         </section>
 
-        <section class="reveal" style="text-align: center; margin-top: 80px; padding-bottom: 100px;">
-            <div class="formula-box" style="border-color: var(--primary); background: rgba(254,75,0,0.05);">
-                <h2 style="border: none; margin-top: 0;">Stop Being The Best Kept Secret</h2>
-                <p>
-                    The window is closing. Every day you stay invisible, someone less qualified is taking your spot.<br>
-                    You have the expertise. Now get the clarity.
-                </p>
-                <div class="cta-container">
-                    <a href="#" class="btn-primary">Download The Framework</a>
-                    <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">Instant Access PDF • No "Guru" Nonsense</p>
+
+
+        <section class="reveal">
+
+            <h3>Step 2: Identify Your Core Process</h3>
+
+            <p>Your Core Process is the natural, repeatable sequence your brain uses to solve problems. It is your methodological differentiator.</p>
+
+
+
+            <div class="workbook-section">
+
+                <div class="example-box">
+
+                    <strong>Common Patterns:</strong>
+
+                    The Excavator (Dig → Uncover → Build), The Simplifier (Observe → Remove → Clarify), The Builder (Identify → Design → Scale).
+
                 </div>
+
+
+
+                <div class="input-group">
+
+                    <label>List 4 verbs that appear most often in how you solve problems:</label>
+
+                    <input type="text" placeholder="e.g., Listen, Simplify, Build, Test">
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label style="color: var(--primary);">YOUR CORE PROCESS</label>
+
+                    <p style="font-size: 0.8rem; margin-bottom: 5px;">Format: [Verb 1] → [Verb 2] → [Verb 3] → [Verb 4]</p>
+
+                    <input type="text" placeholder="_____________ → _____________ → _____________ → _____________">
+
+                </div>
+
             </div>
+
         </section>
+
+
+
+        <section class="reveal">
+
+            <h3>Step 3: Extract Your Core Experience</h3>
+
+            <p>Your lived experience is your authority. You don't need credentials; you need to own your journey.</p>
+
+
+
+            <div class="workbook-section">
+
+                <div class="input-group">
+
+                    <label>Identity Intersections (Age, Culture, Background, Career):</label>
+
+                    <input type="text" placeholder="I'm a [X] + [Y] + [Z]">
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>The "Weird" Factor (Unusual combinations):</label>
+
+                    <input type="text" placeholder="Background + Skill + Experience">
+
+                </div>
+
+
+
+                <div class="input-group" style="margin-top: 30px;">
+
+                    <label style="color: var(--primary);">CREDIBILITY STATEMENT</label>
+
+                    <textarea placeholder="I am [identity] who went from [before] to [after] by [method]. This makes me credible because..."></textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="reveal">
+
+            <h3>Step 4: The Voice Statement</h3>
+
+            <p>Synthesize everything into one paragraph. This is your filter.</p>
+
+
+
+            <div class="workbook-section">
+
+                <div class="example-box">
+
+                    <strong>Template:</strong> I believe [CORE BELIEF]. I help [WHO] by [CORE PROCESS], so they [OUTCOME]. I'm credible because [CORE EXPERIENCE].
+
+                </div>
+
+                <textarea style="height: 150px;" placeholder="Write your full Voice Statement here..."></textarea>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="reveal">
+
+            <h2>Phase 2: Expression</h2>
+
+            <p>Turning Voice into Brand through Stories, Expertise, and Vision.</p>
+
+
+
+            <h3>Step 5: Story Bank</h3>
+
+            <div class="workbook-section">
+
+                <div class="input-group">
+
+                    <label>1. Belief Story (When did you realize your belief was true?)</label>
+
+                    <textarea placeholder="The moment I realized..."></textarea>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>2. Process Story (When did you use your process to solve a problem?)</label>
+
+                    <textarea placeholder="The problem was... My process solved it by..."></textarea>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>3. Experience Story (What struggle makes you credible?)</label>
+
+                    <textarea placeholder="I overcame..."></textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="reveal">
+
+            <h3>Step 6: Voice-Filtered Expertise</h3>
+
+            <p>Generic expertise is replaceable. Voice-filtered expertise is category-of-one.</p>
+
+
+
+            <div class="workbook-section">
+
+                <div class="input-group">
+
+                    <label style="color: var(--primary);">YOUR METHODOLOGY</label>
+
+                    <p style="font-size: 0.8rem; margin-bottom: 5px;">Format: I teach [TOPIC] through a [CORE BELIEF] lens, using [CORE PROCESS].</p>
+
+                    <textarea placeholder="I teach..."></textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="reveal">
+
+            <h3>Step 7: Vision</h3>
+
+            <p>What separates a business from a movement? Vision.</p>
+
+
+
+            <div class="workbook-section">
+
+                <div class="input-group">
+
+                    <label>Mission Statement</label>
+
+                    <p style="font-size: 0.8rem; margin-bottom: 5px;">"I'm building a world where..."</p>
+
+                    <textarea placeholder="I'm building a world where..."></textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="reveal">
+
+            <h2>Phase 3: Positioning</h2>
+
+            <p>Translating your Voice into a clear market position.</p>
+
+
+
+            <h3>Step 8: One-Line Positioning</h3>
+
+            <div class="workbook-section">
+
+                <div class="example-box">
+
+                    <strong>Formula:</strong> I help [WHO] who [SPECIFIC PROBLEM] [YOUR METHOD] so they [SPECIFIC OUTCOME].
+
+                </div>
+
+                <div class="input-group">
+
+                    <label style="color: var(--primary);">YOUR ONE-LINER</label>
+
+                    <input type="text" placeholder="I help... who... by... so they...">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="reveal">
+
+            <h3>Step 9: The 30-Second Pitch</h3>
+
+            <p>What you say when people ask "Tell me more."</p>
+
+
+
+            <div class="workbook-section">
+
+                <div class="example-box">
+
+                    <strong>Template:</strong> [One-Liner]. Here's the problem: [The Pain]. Most people [Common Approach]. I do it differently: [Voice-Filtered Method]. [Result].
+
+                </div>
+
+                <div class="input-group">
+
+                    <label style="color: var(--primary);">YOUR PITCH</label>
+
+                    <textarea style="height: 120px;" placeholder="I help... Here's the problem: Most people... I do it differently..."></textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="reveal" style="text-align: center; margin-top: 100px; padding-bottom: 100px;">
+
+            <div class="formula-box" style="border-color: var(--primary);">
+
+                <h2 style="border: none; margin-top: 0;">The End of Performance</h2>
+
+                <p>You have now excavated your foundation. You are no longer building on tactics, but on the unshakeable truth of who you are.</p>
+
+                <p>
+
+                    The world is full of echoes. <strong>Be a Voice.</strong>
+
+                </p>
+
+                <button class="btn-download" onclick="window.print()" style="margin: 30px auto;">
+
+                    Download Your Framework
+
+                </button>
+
+            </div>
+
+        </section>
+
+
 
     </div>
 
+
+
     <script>
+
         // Reveal on Scroll Script
+
         function reveal() {
+
             var reveals = document.querySelectorAll(".reveal");
+
             for (var i = 0; i < reveals.length; i++) {
+
                 var windowHeight = window.innerHeight;
+
                 var elementTop = reveals[i].getBoundingClientRect().top;
+
                 var elementVisible = 100;
+
                 if (elementTop < windowHeight - elementVisible) {
+
                     reveals[i].classList.add("active");
+
                 }
+
             }
+
         }
+
         window.addEventListener("scroll", reveal);
+
         // Trigger once on load
+
         reveal();
+
     </script>
+
 </body>
+
 </html>
